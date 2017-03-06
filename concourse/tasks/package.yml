@@ -9,6 +9,6 @@ inputs:
 
 run:
   path: "mvn"
-  args: ["clean", "install"]
+  args: ["-f", "source-code/pom.xml", "clean", "install"]
 params:
   MAVEN_BASEDIR: source-code
