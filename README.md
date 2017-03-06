@@ -4,3 +4,17 @@ This project is to demonstrate that Logback can be set up with a more XML style 
 ```
 mvn clean install tomcat7:run -Dmaven.tomcat.port=9000
 ```
+
+To build the project from Concourse:
+
+```
+$ vagrant init concourse/lite
+$ vagrant up
+$ fly -t lite login -c http://192.168.100.4:8080
+
+$ cd ~/workspace
+$ git clone https://github.com/adelamodwala/logbackDemo.git
+$ cd logbackDemo
+$ fly -t lite set-pipeline -p logbackDemo -c concourse/pipeline.yml
+$ fly -t lite unpause-pipeline -p logbackDemo
+```
