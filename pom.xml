@@ -152,11 +152,11 @@
             <artifactId>logback-classic</artifactId>
             <version>1.2.1</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>io.reactivex</groupId>-->
-            <!--<artifactId>rxjava</artifactId>-->
-            <!--<version>1.2.1</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>io.reactivex</groupId>
+            <artifactId>rxjava</artifactId>
+            <version>1.2.1</version>
+        </dependency>
         <!--<dependency>-->
             <!--<groupId>com.google.firebase</groupId>-->
             <!--<artifactId>firebase-server-sdk</artifactId>-->
