@@ -1,10 +1,27 @@
 version: '2'
 services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - /var/lib/mysql
+    restart: always
+    ports:
+      - "3300:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: demodb
+      MYSQL_USER: demouser
+      MYSQL_PASSWORD: demopwd
   web:
     build: .
+    depends_on:
+      - db
+    environment:
+      APP_DB_HOST: db:3306
+      APP_DATABASE: demodb
+      APP_DB_USER: demouser
+      APP_DB_PASSWORD: demopwd
     ports:
      - "5000:8080"
     volumes:
-     - .:/code
-  redis:
-    image: "redis:alpine"
+     - .:/tmp

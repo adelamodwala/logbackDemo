@@ -14,7 +14,7 @@ public class DemoClass1 {
 
     @PostConstruct
     public void init() {
-        logger.info("Hey INFO!");
+        logger.info("Hey INFO BALEF!");
         logger.debug("Hey DEBUG!");
         logger.trace("Hey TRACE!");
         logger.error("Hey ERROR!");
