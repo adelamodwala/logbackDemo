@@ -1,0 +1,31 @@
+version: '2'
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - /var/lib/mysql
+    restart: always
+    environment:
+       MYSQL_ROOT_PASSWORD: secret
+       MYSQL_DATABASE: demodb
+       MYSQL_USER: demouser
+       MYSQL_PASSWORD: demopwd
+  web:
+    depends_on:
+      - db
+    restart: always
+    environment:
+      APP_DB_HOST: db:3306
+      APP_DB_USER: demouser
+      APP_DB_PASSWORD: demopwd
+    build: .
+    expose:
+      - "8181"
+  lb:
+    image: dockercloud/haproxy
+    links:
+      - web
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 80:80

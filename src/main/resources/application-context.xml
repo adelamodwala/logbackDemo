@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
+<beans
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
 						http://www.springframework.org/schema/beans/spring-beans.xsd
 						http://www.springframework.org/schema/context
       				   	http://www.springframework.org/schema/context/spring-context-4.1.xsd
@@ -15,5 +16,40 @@
     <bean id="webSocketConfig" class="com.demo.WebSocketConfig"/>
     <bean id="socketHandler" class="com.demo.SocketHandler"/>
     <bean id="demoClass1" class="com.demo.DemoClass1"/>
+
+    <context:property-placeholder location="classpath:application.properties"/>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation">
+            <value>classpath:hibernate.cfg.xml</value>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${spring.database.driverClassName}"/>
+        <property name="jdbcUrl" value="${JDBC_CONNECTION_STRING}"/>
+
+        <!-- Standard properties -->
+        <property name="initialPoolSize" value="${database.initialPoolSize}"/>
+        <property name="minPoolSize" value="${database.minPoolSize}"/>
+        <property name="maxPoolSize" value="${database.maxPoolSize}"/>
+        <property name="checkoutTimeout" value="${database.checkoutTimeout}"/>
+        <property name="maxStatements" value="${database.maxStatements}"/>
+        <property name="testConnectionOnCheckin" value="${database.testConnectionOnCheckin}"/>
+        <property name="idleConnectionTestPeriod" value="${database.idleConnectionTestPeriod}"/>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="persistenceExceptionTranslationPostProcessor" class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 
 </beans>
