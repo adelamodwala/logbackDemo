@@ -18,6 +18,7 @@ services:
       APP_DB_HOST: db:3306
       APP_DB_USER: demouser
       APP_DB_PASSWORD: demopwd
+      APP_DB_NAME: demodb
     build: .
     expose:
       - "8181"
