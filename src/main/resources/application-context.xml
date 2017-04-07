@@ -16,6 +16,7 @@
     <bean id="webSocketConfig" class="com.demo.WebSocketConfig"/>
     <bean id="socketHandler" class="com.demo.SocketHandler"/>
     <bean id="demoClass1" class="com.demo.DemoClass1"/>
+    <bean id="homeController" class="com.demo.HomeController"/>
 
     <context:property-placeholder location="classpath:application.properties"/>
 
