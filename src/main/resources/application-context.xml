@@ -11,6 +11,7 @@
       				   	http://www.springframework.org/schema/aop
       				   	http://www.springframework.org/schema/aop/spring-aop.xsd">
 
+    <context:property-placeholder location="classpath:application.properties"/>
     <aop:config proxy-target-class="true"/>
 
     <bean id="webSocketConfig" class="com.demo.WebSocketConfig"/>
@@ -18,8 +19,6 @@
     <bean id="demoClass1" class="com.demo.DemoClass1"/>
     <bean id="userController" class="com.demo.controllers.UserController"/>
     <bean id="userDao" class="com.demo.models.UserDao"/>
-
-    <context:property-placeholder location="classpath:application.properties"/>
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
@@ -37,8 +36,6 @@
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="driverClass" value="${spring.database.driverClassName}"/>
         <property name="jdbcUrl" value="${JDBC_CONNECTION_STRING}"/>
-
-        <!-- Standard properties -->
         <property name="initialPoolSize" value="${database.initialPoolSize}"/>
         <property name="minPoolSize" value="${database.minPoolSize}"/>
         <property name="maxPoolSize" value="${database.maxPoolSize}"/>

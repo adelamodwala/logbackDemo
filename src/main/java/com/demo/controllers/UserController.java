@@ -8,13 +8,14 @@ import org.slf4j.LoggerFactory;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.*;	
 
 /**
  * A class to test interactions with the MySQL database using the UserDao class.
  *
  * @author netgloo
  */
+@RequestMapping("/users")
 public class UserController {
 
   final static Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -36,8 +37,7 @@ public class UserController {
    * @return A string describing if the user is succesfully created or not.
    */
   @RequestMapping(value = "/create", method = RequestMethod.GET)
-  @ResponseBody
-  public String create(@RequestParam("email") String email, @RequestParam("name") String name) {
+  public @ResponseBody String create(@RequestParam("email") String email, @RequestParam("name") String name) {
 
     logger.info("calling create() " + email);
 
